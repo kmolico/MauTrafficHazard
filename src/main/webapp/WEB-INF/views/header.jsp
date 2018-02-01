@@ -11,6 +11,7 @@
 <link href="${coreCss}" rel="stylesheet" />
 <link href="<spring:url value='/resources/css/app.css' />" rel="stylesheet"></link>
 <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
+<script type="text/javascript" src="resources/js/jQuery.js"></script>
 </head>
 
 <spring:url value="/" var="urlHome" />
