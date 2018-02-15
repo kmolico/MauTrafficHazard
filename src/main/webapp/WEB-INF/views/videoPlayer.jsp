@@ -7,24 +7,36 @@
 <html lang="en">
 <jsp:include page="header.jsp" />
 
-<spring:url value="/17060012/tutorial" var="urlVideo1" />
-<spring:url value="/10020003/tutorial" var="urlVideo2" />
 <spring:url value="/getTutorialVideo" var="getTutorialVideo" />
 
 
 <script>
 $(document).ready(function(){
+	var videoDetails = ${videoDetails};
+	
+	var flagTime = [];
 	var flagCount = 0;
 	var vid = document.getElementById("tutorial");
 	
-	$('#video_overlay #icon').click(function() {
+	$('#start_icon').click(function() {
 		$('#video_overlay').hide();
 		$("#tutorial").get(0).play();
 	});
+	$('#review_icon').click(function() {
+		$('#score_overlay').hide();
+		//$('#video_overlay').show();
+		$("#tutorial").get(0).play();
+	});
 	
-	$('#next_overlay #icon').click(function() {
-		$('#next_overlay').hide();
+	$('#retry_icon').click(function() {
+		reset();
+		$('#score_overlay').hide();
 		$('#video_overlay').show();
+	});
+	
+	$('#back_icon').click(function() {
+		reset();
+		window.history.back();
 	});
 	
 	vid.ontimeupdate = function(){
@@ -39,31 +51,53 @@ $(document).ready(function(){
 	    var percentage = ( left / totalWidth );
 	    var vidTime = vid.duration * percentage;
 	    vid.currentTime = vidTime;
-	});//click() 
+	});
 	
 	$("#tutorial").on("click", function(e){
-		    var percentage = (100 / vid.duration) * vid.currentTime;
+			var currentTime = vid.currentTime;
+		    var percentage = (100 / vid.duration) * currentTime;
 		    var totalWidth = $("#custom-seekbar").width();
 		    var left = (totalWidth / 100) * percentage;
 		    
 		    flagCount = flagCount + 1;
+		    flagTime.push(currentTime);
 		    var imageId = "flag"+flagCount;
-		    $('#flag-container').append('<img style="position:absolute;" id='+imageId+' width="30px" height="30px" src="<%=request.getContextPath() %>/resources/images/Redflag.png"/>');
+		    $('#flag-container').append('<img style="position:absolute;" id='+imageId+' width="4%" height="100%" src="<%=request.getContextPath() %>/resources/images/Redflag.png"/>');
 		    $('#'+imageId).offset({left: $('#'+imageId).offset().left + left - 8});
 		
 	});
 	
 	$('#tutorial').on('ended',function(){
-		reset();
-		$('#videoSource').attr('src','${urlVideo2}');
-		$('#tutorial').load();
-		$('#next_overlay').show();
+		var totalScore = 0;
+		$.each(videoDetails.listTimeFrame, function( index, hazard ) {
+			$.each(flagTime, function(index, item) {
+				totalScore = totalScore + calcScore(item, hazard.start, hazard.end);
+			});
+		});
+		$('#score').text(totalScore + "/" + (videoDetails.listTimeFrame.length * 5));
+		//$('#videoSource').attr('src','${urlVideo2}');
+		//$('#tutorial').load();
+		$('#score_overlay').show();
 	});
 	
 	function reset(){
 		flagCount = 0;
+		flagTime = [];
 		firstClick = false;
 		$('#flag-container').empty();
+	}
+	
+	function calcScore(actual, start, end){
+		if(actual >= start && actual <= end){
+			var timeBeforeZero = end-actual;
+			var interval = (end-start)/5;
+			var score = timeBeforeZero / interval;
+			return Math.ceil(score);
+		}
+		else{
+			return 0;
+		}
+		
 	}
 
 });
@@ -77,24 +111,30 @@ $(document).ready(function(){
 			<p class="text-info">This tutorial has 5 clips, each with 1 developing hazard.</p>
 			<p class="text-info">Tap or click the video when you feel you are encountering a developing hazard. This is something that would cause you to take some form of action, such as changing speed or direction. A red flag will appear at the bottom of the screen to show your response.</p>
 			<p class="text-info">You will score 5 points for each developing hazard. The earlier you recognise and respond to the hazard, the more points you will receive.</p>
-			
-			<div class="card-deck">
-				<c:forEach items="${listVideos}" var="video">
-					<a href="<c:url value="/tutorial/${video.videoId}" />">
-						  <div class="card">
-						  	<img class="card-img-top" src="<c:url value="${video.thumbnailUrl}" />" alt="Beginner">
-						    <div class="card-img-overlay" style="display:none; background-color:#00000085"></div>
-						    <div class="card-block">
-						      <h4 class="card-title">${video.difficultyDesc}</h4>
-						      <p class="card-text">Hazard perception test 1</p>
-						      <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-						    </div>
-						  </div>
-					</a>
-				</c:forEach>
+			<div id="video-frame">
+				<div class="card">
+					<div id="video_overlay" class="vidready">
+						<div class="icon" id="start_icon">Start</div>
+					</div>
+					<div id="score_overlay" class="vidready" style="display:none">
+						<div id="result">Your Score: <span id="score"></span></div>
+						<div class="icon" id="retry_icon">Retry</div>
+						<div class="icon" id="review_icon">Review</div>
+						<div class="icon" id="back_icon">Back</div>
+					</div>
+					<div>
+						<video id="tutorial" width="100%" preload="auto" controls> 
+						  <source id="videoSource" src="${getTutorialVideo}" type="video/mp4">
+						</video>
+					</div>
+					<div id="flag-container">
+					</div>	
+					<div id="custom-seekbar">
+					  	<span></span>
+					</div>			
+				</div>
 			</div>
-			
-	
+
 		</div>
 	</div>
 <jsp:include page="footer.jsp" />

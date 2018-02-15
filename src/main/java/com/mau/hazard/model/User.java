@@ -1,34 +1,16 @@
 package com.mau.hazard.model;
 
 public class User {
-	// form:hidden - hidden value
 	Integer id;
-
-	// form:input - textbox
 	String name;
-	
 	String lname;
 	String fname;
-
-	// form:input - textbox
 	String email;
-
-	// form:textarea - textarea
 	String address;
-
-	// form:input - password
 	String password;
-
-	// form:input - password
 	String confirmPassword;
-
-	// form:radiobutton - radio button
 	String sex;
-
-	// form:radiobuttons - radio button
-	Integer license;
-
-	// form:select - form:option - dropdown - single select
+	String license;
 	Integer active;
 
 	public boolean isNew() {
@@ -83,8 +65,6 @@ public class User {
 		this.confirmPassword = confirmPassword;
 	}
 
-	
-
 	public String getSex() {
 		return sex;
 	}
@@ -92,7 +72,6 @@ public class User {
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
-
 
 	public String getLname() {
 		return lname;
@@ -110,11 +89,11 @@ public class User {
 		this.fname = fname;
 	}
 
-	public Integer getLicense() {
+	public String getLicense() {
 		return license;
 	}
 
-	public void setLicense(Integer license) {
+	public void setLicense(String license) {
 		this.license = license;
 	}
 
@@ -125,13 +104,4 @@ public class User {
 	public void setActive(Integer active) {
 		this.active = active;
 	}
-
-	/*@Override
-	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", address=" + address
-				+ ", password=" + password + ", confirmPassword=" + confirmPassword
-				+ ", newsletter=" + newsletter + ", framework=" + framework + ", sex=" + sex
-				+ ", number=" + number + ", country=" + country + ", skill=" + skill + "]" + isNew();
-	}*/
-
 }

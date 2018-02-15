@@ -72,7 +72,6 @@ public class UserController {
 		logger.debug("saveOrUpdateUser() : {}", user);
 
 		if (result.hasErrors()) {
-			populateDefaultModel(model);
 			return "registration";
 		} else {
 
@@ -86,11 +85,7 @@ public class UserController {
 
 			userService.saveOrUpdate(user);
 
-			// POST/REDIRECT/GET
 			return "redirect:/users/" + user.getId();
-
-			// POST/FORWARD/GET
-			// return "user/list";
 
 		}
 
@@ -106,8 +101,6 @@ public class UserController {
 
 		model.addAttribute("userForm", user);
 
-		populateDefaultModel(model);
-
 		return "registration";
 
 	}
@@ -120,8 +113,6 @@ public class UserController {
 
 		User user = userService.findById(id);
 		model.addAttribute("userForm", user);
-
-		populateDefaultModel(model);
 
 		return "registration";
 
@@ -157,42 +148,6 @@ public class UserController {
 		model.addAttribute("user", user);
 
 		return "show";
-
-	}
-
-	private void populateDefaultModel(Model model) {
-
-		List<String> frameworksList = new ArrayList<String>();
-		frameworksList.add("Spring MVC");
-		frameworksList.add("Struts 2");
-		frameworksList.add("JSF 2");
-		frameworksList.add("GWT");
-		frameworksList.add("Play");
-		frameworksList.add("Apache Wicket");
-		model.addAttribute("frameworkList", frameworksList);
-
-		Map<String, String> skill = new LinkedHashMap<String, String>();
-		skill.put("Hibernate", "Hibernate");
-		skill.put("Spring", "Spring");
-		skill.put("Struts", "Struts");
-		skill.put("Groovy", "Groovy");
-		skill.put("Grails", "Grails");
-		model.addAttribute("javaSkillList", skill);
-
-		List<Integer> numbers = new ArrayList<Integer>();
-		numbers.add(1);
-		numbers.add(2);
-		numbers.add(3);
-		numbers.add(4);
-		numbers.add(5);
-		model.addAttribute("numberList", numbers);
-
-		Map<String, String> country = new LinkedHashMap<String, String>();
-		country.put("US", "United Stated");
-		country.put("CN", "China");
-		country.put("SG", "Singapore");
-		country.put("MY", "Malaysia");
-		model.addAttribute("countryList", country);
 
 	}
 

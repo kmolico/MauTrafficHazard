@@ -8,15 +8,15 @@
 <html lang="en">
 
 <jsp:include page="header.jsp" />
-
+<div id="mainWrapper">
 <div class="container">
 
 	<c:choose>
 		<c:when test="${userForm['new']}">
-			<h1>Account Information</h1>
+			<h2>Account Information</h2>
 		</c:when>
 		<c:otherwise>
-			<h1>Account Information</h1>
+			<h2>Account Information</h2>
 		</c:otherwise>
 	</c:choose>
 	<br />
@@ -34,7 +34,7 @@
 			<div class="col-sm-10">
 				<form:input path="name" type="text" class="form-control"
                                 id="name" placeholder="Username" />
-				<form:errors path="name" class="control-label" />
+				<form:errors path="name" class="col-form-label text-danger" />
 			</div>
 		  </div>
 		</spring:bind>
@@ -45,7 +45,7 @@
 			<div class="col-sm-10">
 				<form:input path="fname" type="text" class="form-control"
                                 id="fname" placeholder="First Name" />
-				<form:errors path="fname" class="control-label" />
+				<form:errors path="fname" class="col-form-label text-danger" />
 			</div>
 		  </div>
 		</spring:bind>
@@ -56,7 +56,7 @@
 			<div class="col-sm-10">
 				<form:input path="lname" type="text" class="form-control"
                                 id="lname" placeholder="Last Name" />
-				<form:errors path="lname" class="control-label" />
+				<form:errors path="lname" class="col-form-label text-danger" />
 			</div>
 		  </div>
 		</spring:bind>
@@ -67,7 +67,7 @@
 			<div class="col-sm-10">
 				<form:input path="email" class="form-control"
                                 id="email" placeholder="Email" />
-				<form:errors path="email" class="control-label" />
+				<form:errors path="email" class="col-form-label text-danger" />
 			</div>
 		  </div>
 		</spring:bind>
@@ -78,7 +78,7 @@
 			<div class="col-sm-10">
 				<form:password path="password" class="form-control"
                                 id="password" placeholder="password" />
-				<form:errors path="password" class="control-label" />
+				<form:errors path="password" class="col-form-label text-danger" />
 			</div>
 		  </div>
 		</spring:bind>
@@ -89,7 +89,7 @@
 			<div class="col-sm-10">
 				<form:password path="confirmPassword" class="form-control"
                                 id="password" placeholder="password" />
-				<form:errors path="confirmPassword" class="control-label" />
+				<form:errors path="confirmPassword" class="col-form-label text-danger" />
 			</div>
 		  </div>
 		</spring:bind>
@@ -100,7 +100,7 @@
 			<div class="col-sm-10">
 				<form:textarea path="address" rows="5" class="form-control"
                                 id="address" placeholder="address" />
-				<form:errors path="address" class="control-label" />
+				<form:errors path="address" class="col-form-label text-danger" />
 			</div>
 		  </div>
 		</spring:bind>
@@ -116,7 +116,7 @@
                                 <label class="radio-inline">
                                   <form:radiobutton path="sex" value="F" /> Female
 				</label> <br />
-				<form:errors path="sex" class="control-label" />
+				<form:errors path="sex" class="col-form-label text-danger" />
 			</div>
 		  </div>
 		</spring:bind>
@@ -127,7 +127,7 @@
 			<div class="col-sm-10">				
 				<form:input path="license" type="text" class="form-control"
                                 id="license" placeholder="License" />
-				<form:errors path="license" class="control-label" />
+				<form:errors path="license" class="col-form-label text-danger" />
 			</div>
 		  </div>
 		</spring:bind>
@@ -138,11 +138,11 @@
 		  <div class="col-sm-offset-2 col-sm-10">
 			<c:choose>
 			  <c:when test="${userForm['new']}">
-			     <button type="submit" class="btn-lg btn-primary pull-right">Add
+			     <button type="submit" class="btn btn-primary float-right">Add
                              </button>
 			  </c:when>
 			  <c:otherwise>
-			     <button type="submit" class="btn-lg btn-primary pull-right">Update
+			     <button type="submit" class="btn btn-primary float-right">Update
                              </button>
 			  </c:otherwise>
 			</c:choose>
@@ -150,6 +150,7 @@
 		</div>
 	</form:form>
 
+</div>
 </div>
 
 <jsp:include page="footer.jsp" />

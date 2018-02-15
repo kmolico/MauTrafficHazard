@@ -16,6 +16,10 @@ public class RegistrationFormValidator implements Validator {
 	@Autowired
 	@Qualifier("emailValidator")
 	EmailValidator emailValidator;
+	
+	@Autowired
+	@Qualifier("numericValidator")
+	NumericValidator numericValidator;
 
 	@Autowired
 	UserService userService;
@@ -43,25 +47,19 @@ public class RegistrationFormValidator implements Validator {
 			errors.rejectValue("email", "Pattern.userForm.email");
 		}
 
-		if(user.getLicense()==null || user.getLicense()<0){
+		if(user.getLicense()==null || user.getLicense() == ""){
 			errors.rejectValue("license", "NotEmpty.userForm.license");
 		}
+		
+		if(!numericValidator.isNumeric(user.getLicense())) {
+			errors.rejectValue("license", "NotNumeric.userForm.license");
+		}
 
-		/*if(user.getCountry().equalsIgnoreCase("none")){
-			errors.rejectValue("country", "NotEmpty.userForm.country");
-		}*/
 
 		if (!user.getPassword().equals(user.getConfirmPassword())) {
 			errors.rejectValue("confirmPassword", "Diff.userform.confirmPassword");
 		}
 
-		/*if (user.getFramework() == null || user.getFramework().size() < 2) {
-			errors.rejectValue("framework", "Valid.userForm.framework");
-		}*/
-
-		/*if (user.getSkill() == null || user.getSkill().size() < 3) {
-			errors.rejectValue("skill", "Valid.userForm.skill");
-		}*/
 
 	}
 

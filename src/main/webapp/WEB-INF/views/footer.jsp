@@ -1,10 +1,10 @@
 <%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
-<div class="container">
-	<hr>
-	<footer>
-		<p>&copy; MDX 2018</p>
+
+	<footer class="footer">
+		<div class="container">
+			<span class="text-muted">&copy; MDX 2018</span>
+		</div>
 	</footer>
-</div>
 
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>

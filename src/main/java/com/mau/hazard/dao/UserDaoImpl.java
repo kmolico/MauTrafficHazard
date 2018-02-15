@@ -28,8 +28,7 @@ public class UserDaoImpl implements UserDao {
 	NamedParameterJdbcTemplate namedParameterJdbcTemplate;
 
 	@Autowired
-	public void setNamedParameterJdbcTemplate(
-		NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
+	public void setNamedParameterJdbcTemplate(NamedParameterJdbcTemplate namedParameterJdbcTemplate) {
 		this.namedParameterJdbcTemplate = namedParameterJdbcTemplate;
 	}
 
@@ -132,31 +131,9 @@ public class UserDaoImpl implements UserDao {
 			user.setAddress(rs.getString("address"));
 			user.setPassword(rs.getString("password"));
 			user.setSex(rs.getString("gender"));
-			user.setLicense(rs.getInt("license"));
+			user.setLicense(rs.getString("license"));
 			user.setActive(rs.getInt("enabled"));
 			return user;
 		}
 	}
-
-	private static List<String> convertDelimitedStringToList(String delimitedString) {
-
-		List<String> result = new ArrayList<String>();
-
-		if (!StringUtils.isEmpty(delimitedString)) {
-			result = Arrays.asList(StringUtils.delimitedListToStringArray(delimitedString, ","));
-		}
-		return result;
-
-	}
-
-	private String convertListToDelimitedString(List<String> list) {
-
-		String result = "";
-		if (list != null) {
-			result = StringUtils.arrayToCommaDelimitedString(list.toArray());
-		}
-		return result;
-
-	}
-
 }
