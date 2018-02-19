@@ -122,7 +122,7 @@ body, #mainWrapper, .form-control{
   background-color: black;
 }
 
-#custom-seekbar span
+#custom-seekbar #seek
 {
   background-color: orange;
   position: absolute;
@@ -131,6 +131,17 @@ body, #mainWrapper, .form-control{
   height: 100%;
   width: 0px;
   z-index: 300500;
+}
+
+.reviewFrame
+{
+  background-color: blue;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0px;
+  z-index: 300600;
 }
 
 #flag-container

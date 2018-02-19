@@ -13,7 +13,7 @@
 <script>
 $(document).ready(function(){
 	var videoDetails = ${videoDetails};
-	
+	var reviewMode = false;
 	var flagTime = [];
 	var flagCount = 0;
 	var vid = document.getElementById("tutorial");
@@ -23,15 +23,33 @@ $(document).ready(function(){
 		$("#tutorial").get(0).play();
 	});
 	$('#review_icon').click(function() {
+		reviewMode = true;
 		$('#score_overlay').hide();
+		$(".reviewFrame").remove();
 		//$('#video_overlay').show();
+		var totalWidth = $("#custom-seekbar").width();
+		$.each(videoDetails.listTimeFrame, function( index, hazard ) {
+			$.each(flagTime, function(index, item) {
+				var startTime = hazard.start;
+			    var percentage1 = (100 / vid.duration) * startTime;
+			    
+			    $('#custom-seekbar').append('<span id="'+"frame"+index+'" class="reviewFrame"></span>');
+			    $("#frame"+index).css("left", percentage1+"%");
+			    
+			    var endTime = hazard.end;
+			    var percentage = (100 / vid.duration) * endTime;
+			    $("#frame"+index).css("width", (percentage-percentage1)+"%");
+			});
+		});
+		
+		
 		$("#tutorial").get(0).play();
 	});
 	
 	$('#retry_icon').click(function() {
 		reset();
 		$('#score_overlay').hide();
-		$('#video_overlay').show();
+		$('#video_overlay').show();		
 	});
 	
 	$('#back_icon').click(function() {
@@ -41,7 +59,7 @@ $(document).ready(function(){
 	
 	vid.ontimeupdate = function(){
 	  var percentage = ( vid.currentTime / vid.duration ) * 100;
-	  $("#custom-seekbar span").css("width", percentage+"%");
+	  $("#custom-seekbar #seek").css("width", percentage+"%");
 	};
 
 	$("#custom-seekbar").on("click", function(e){
@@ -54,6 +72,7 @@ $(document).ready(function(){
 	});
 	
 	$("#tutorial").on("click", function(e){
+		if(!reviewMode){
 			var currentTime = vid.currentTime;
 		    var percentage = (100 / vid.duration) * currentTime;
 		    var totalWidth = $("#custom-seekbar").width();
@@ -64,7 +83,7 @@ $(document).ready(function(){
 		    var imageId = "flag"+flagCount;
 		    $('#flag-container').append('<img style="position:absolute;" id='+imageId+' width="4%" height="100%" src="<%=request.getContextPath() %>/resources/images/Redflag.png"/>');
 		    $('#'+imageId).offset({left: $('#'+imageId).offset().left + left - 8});
-		
+		}
 	});
 	
 	$('#tutorial').on('ended',function(){
@@ -85,6 +104,8 @@ $(document).ready(function(){
 		flagTime = [];
 		firstClick = false;
 		$('#flag-container').empty();
+		$(".reviewFrame").remove();
+		reviewMode = false;
 	}
 	
 	function calcScore(actual, start, end){
@@ -130,7 +151,7 @@ $(document).ready(function(){
 					<div id="flag-container">
 					</div>	
 					<div id="custom-seekbar">
-					  	<span></span>
+					  	<span id="seek"></span>
 					</div>			
 				</div>
 			</div>
