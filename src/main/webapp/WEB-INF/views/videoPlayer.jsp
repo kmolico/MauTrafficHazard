@@ -29,17 +29,34 @@ $(document).ready(function(){
 		//$('#video_overlay').show();
 		var totalWidth = $("#custom-seekbar").width();
 		$.each(videoDetails.listTimeFrame, function( index, hazard ) {
-			$.each(flagTime, function(index, item) {
+			//$.each(flagTime, function(index, item) {
 				var startTime = hazard.start;
 			    var percentage1 = (100 / vid.duration) * startTime;
-			    
-			    $('#custom-seekbar').append('<span id="'+"frame"+index+'" class="reviewFrame"></span>');
-			    $("#frame"+index).css("left", percentage1+"%");
-			    
 			    var endTime = hazard.end;
 			    var percentage = (100 / vid.duration) * endTime;
-			    $("#frame"+index).css("width", (percentage-percentage1)+"%");
-			});
+			    var interval = (percentage-percentage1)/5;
+			    
+			    
+			    $('#custom-seekbar').append('<span id="'+"frame1"+index+'" class="reviewFrame" style="background-color:#0f0"></span>');
+			    $("#frame1"+index).css("left", percentage1+"%");  
+			    $("#frame1"+index).css("width", interval+"%");
+			    
+			    $('#custom-seekbar').append('<span id="'+"frame2"+index+'" class="reviewFrame" style="background-color:#af0"></span>');
+			    $("#frame2"+index).css("left", percentage1+interval+"%");  
+			    $("#frame2"+index).css("width", interval+"%");
+			    
+			    $('#custom-seekbar').append('<span id="'+"frame3"+index+'" class="reviewFrame" style="background-color:#ff0"></span>');
+			    $("#frame3"+index).css("left", percentage1+(2*interval)+"%");  
+			    $("#frame3"+index).css("width", (interval)+"%");
+			    
+			    $('#custom-seekbar').append('<span id="'+"frame4"+index+'" class="reviewFrame" style="background-color:#f60"></span>');
+			    $("#frame4"+index).css("left", percentage1+(3*interval)+"%");  
+			    $("#frame4"+index).css("width", (interval)+"%");
+			    
+			    $('#custom-seekbar').append('<span id="'+"frame5"+index+'" class="reviewFrame" style="background-color:#f00"></span>');
+			    $("#frame5"+index).css("left", percentage1+(4*interval)+"%");  
+			    $("#frame5"+index).css("width", (interval)+"%");
+			//});
 		});
 		
 		
@@ -82,7 +99,7 @@ $(document).ready(function(){
 		    flagTime.push(currentTime);
 		    var imageId = "flag"+flagCount;
 		    $('#flag-container').append('<img style="position:absolute;" id='+imageId+' width="4%" height="100%" src="<%=request.getContextPath() %>/resources/images/Redflag.png"/>');
-		    $('#'+imageId).offset({left: $('#'+imageId).offset().left + left - 8});
+		    $('#'+imageId).css("left", percentage-1 +"%");
 		}
 	});
 	
