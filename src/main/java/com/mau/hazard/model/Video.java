@@ -2,22 +2,34 @@ package com.mau.hazard.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.mau.hazard.model.Hazard;
 
 import org.springframework.stereotype.Component;
 
 @Component
 public class Video {
+	public Video() {
+		super();
+	}
+	public Video(String videoId, String videoType, String videoUrl, String thumbnailUrl, int difficulty,
+			String difficultyDesc, List<Hazard> listTimeFrame) {
+		super();
+		this.videoId = videoId;
+		this.videoType = videoType;
+		this.videoUrl = videoUrl;
+		this.thumbnailUrl = thumbnailUrl;
+		this.difficulty = difficulty;
+		this.difficultyDesc = difficultyDesc;
+		this.listTimeFrame = listTimeFrame;
+	}
 	private String videoId;
-	private String catId;
-	private String subCatId;
 	private String videoType;
 	private String videoUrl;
 	private String thumbnailUrl;
-	private int numberHazards;
 	private int difficulty;
 	private String difficultyDesc;
 	
-	private List<HazardTimeFrame> listTimeFrame = new ArrayList<>();
+	private List<Hazard> listTimeFrame = new ArrayList<>();
 	
 	
 	public String getVideoId() {
@@ -25,18 +37,6 @@ public class Video {
 	}
 	public void setVideoId(String videoId) {
 		this.videoId = videoId;
-	}
-	public String getCatId() {
-		return catId;
-	}
-	public void setCatId(String catId) {
-		this.catId = catId;
-	}
-	public String getSubCatId() {
-		return subCatId;
-	}
-	public void setSubCatId(String subCatId) {
-		this.subCatId = subCatId;
 	}
 	public String getVideoUrl() {
 		return videoUrl;
@@ -50,16 +50,10 @@ public class Video {
 	public void setThumbnailUrl(String thumbnailUrl) {
 		this.thumbnailUrl = thumbnailUrl;
 	}
-	public int getNumberHazards() {
-		return numberHazards;
-	}
-	public void setNumberHazards(int numberHazards) {
-		this.numberHazards = numberHazards;
-	}
-	public List<HazardTimeFrame> getListTimeFrame() {
+	public List<Hazard> getListTimeFrame() {
 		return listTimeFrame;
 	}
-	public void setListTimeFrame(List<HazardTimeFrame> listTimeFrame) {
+	public void setListTimeFrame(List<Hazard> listTimeFrame) {
 		this.listTimeFrame = listTimeFrame;
 	}
 	public String getVideoType() {

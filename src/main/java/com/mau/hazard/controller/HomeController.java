@@ -15,17 +15,29 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.mau.hazard.model.Video;
+import com.mau.hazard.service.VideoService;
 
 /**
  * Handles requests for the application home page.
  */
 @Controller
+@SessionAttributes({"attempt"})
 public class HomeController {
+	
+	@Autowired
+	private VideoService videoService;
+	
+	@ModelAttribute("attempt")
+	public int getAttempt(){
+	    return 0;
+	}
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
 	
@@ -82,9 +94,13 @@ public class HomeController {
 	
 	
 	@RequestMapping(value = "/test", method = RequestMethod.GET)
-	public String test(ModelMap model) {
-		model.addAttribute("user", getPrincipal());
-		return "test";
+	public ModelAndView test() {
+		//List<Video> videos = videoService.getTestVideoList();	
+		int attempt = videoService.getAttempt();
+		ModelAndView model = new ModelAndView("test");
+		model.addObject("attempt", attempt);
+		model.addObject("user", getPrincipal());
+		return model;
 	}
 	
 }

@@ -9,7 +9,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 
 import com.mau.hazard.constant.Constants;
-import com.mau.hazard.model.HazardTimeFrame;
+import com.mau.hazard.model.Hazard;
 import com.mau.hazard.model.Video;
 
 public class VideoDetailsExtractor implements ResultSetExtractor<Video> {
@@ -20,8 +20,6 @@ public class VideoDetailsExtractor implements ResultSetExtractor<Video> {
 		Video newVideo = new Video();
 		while (rs.next()) {
 			newVideo.setVideoId(rs.getString("videoId"));
-			newVideo.setCatId(rs.getString("catId"));
-			newVideo.setSubCatId(rs.getString("subCatId"));
 			newVideo.setVideoType(rs.getString("videoType"));
 			newVideo.setThumbnailUrl(rs.getString("thumbnailUrl"));
 			newVideo.setVideoUrl(rs.getString("videoUrl"));
@@ -36,8 +34,8 @@ public class VideoDetailsExtractor implements ResultSetExtractor<Video> {
 				newVideo.setDifficultyDesc(Constants.ADVANCE);
 			}
 			
-			HazardTimeFrame timeFrame = new HazardTimeFrame(rs.getDouble("start"), rs.getDouble("end"));
-			newVideo.getListTimeFrame().add(timeFrame);
+			Hazard hazard = new Hazard(rs.getString("hazardId"), rs.getDouble("hazardStart"), rs.getDouble("hazardEnd"), rs.getString("hazardCatId"), rs.getString("hazardSubCatId"), rs.getString("hazardDesc"));
+			newVideo.getListTimeFrame().add(hazard);
 		}
 		
 		return newVideo;

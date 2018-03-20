@@ -8,11 +8,17 @@
 <jsp:include page="header.jsp" />
 
 <spring:url value="/getTutorialVideo" var="getTutorialVideo" />
+<spring:url value="/getNextVideo" var="getNextVideo" />
+<spring:url value="/getResult" var="getResult" />
+
+<c:url var="home" value="/" scope="request" />
 
 
 <script>
 $(document).ready(function(){
 	var videoDetails = ${videoDetails};
+	var testMode = ${testMode};
+	var remainingVideo = ${remainingVideo};
 	var reviewMode = false;
 	var flagTime = [];
 	var flagCount = 0;
@@ -30,9 +36,9 @@ $(document).ready(function(){
 		var totalWidth = $("#custom-seekbar").width();
 		$.each(videoDetails.listTimeFrame, function( index, hazard ) {
 			//$.each(flagTime, function(index, item) {
-				var startTime = hazard.start;
+				var startTime = hazard.hazardStart;
 			    var percentage1 = (100 / vid.duration) * startTime;
-			    var endTime = hazard.end;
+			    var endTime = hazard.hazardEnd;
 			    var percentage = (100 / vid.duration) * endTime;
 			    var interval = (percentage-percentage1)/5;
 			    
@@ -107,13 +113,29 @@ $(document).ready(function(){
 		var totalScore = 0;
 		$.each(videoDetails.listTimeFrame, function( index, hazard ) {
 			$.each(flagTime, function(index, item) {
-				totalScore = totalScore + calcScore(item, hazard.start, hazard.end);
+				var score = calcScore(item, hazard.hazardStart, hazard.hazardEnd);
+				totalScore = totalScore + score;
+				if(testMode){
+					//async save score
+					saveScore(hazard.hazardId, score);
+				}
 			});
 		});
 		$('#score').text(totalScore + "/" + (videoDetails.listTimeFrame.length * 5));
 		//$('#videoSource').attr('src','${urlVideo2}');
 		//$('#tutorial').load();
-		$('#score_overlay').show();
+		if(testMode){
+			if(remainingVideo == 0){
+				$('#result_overlay').show();
+			}
+			else{
+				$('#next_overlay').show();
+			}
+		}
+		else{
+			$('#score_overlay').show();
+		}
+		
 	});
 	
 	function reset(){
@@ -137,18 +159,35 @@ $(document).ready(function(){
 		}
 		
 	}
+	
+	function saveScore(hazardId, score){
+		alert(hazardId + " " + score);
+		$.ajax({
+			type: "POST",
+			url: "${home}test/saveScore", 
+			data : {hazardId : hazardId, score : score},
+			success: function (data) {
+				console.log(data);
+	        },
+	        error: function (e) {
+	        	console.log("ERROR: ", e);
+	        }
+		});
+	}
+	
+	$('#next_icon').click(function() {
+		reset();
+		$('#next_overlay').hide();
+		$("#tutorial").get(0).play();
+	});
 
-});
+});	
 </script>
 
 <body>
 	<div id="mainWrapper">
 		<div class="container">
 	
-			<h2>Hazard Perception tutorial</h2>
-			<p class="text-info">This tutorial has 5 clips, each with 1 developing hazard.</p>
-			<p class="text-info">Tap or click the video when you feel you are encountering a developing hazard. This is something that would cause you to take some form of action, such as changing speed or direction. A red flag will appear at the bottom of the screen to show your response.</p>
-			<p class="text-info">You will score 5 points for each developing hazard. The earlier you recognise and respond to the hazard, the more points you will receive.</p>
 			<div id="video-frame">
 				<div class="card">
 					<div id="video_overlay" class="vidready">
@@ -159,6 +198,12 @@ $(document).ready(function(){
 						<div class="icon" id="retry_icon">Retry</div>
 						<div class="icon" id="review_icon">Review</div>
 						<div class="icon" id="back_icon">Back</div>
+					</div>
+					<div id="next_overlay" class="vidready" style="display:none">
+						<a href="${getNextVideo}"><div class="icon" id="next_icon">Next</div></a>
+					</div>
+					<div id="result_overlay" class="vidready" style="display:none">
+						<a href="${getResult}"><div class="icon" id="result_icon">View Result</div></a>
 					</div>
 					<div>
 						<video id="tutorial" width="100%" preload="auto" controls> 

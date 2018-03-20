@@ -11,12 +11,16 @@
 	<div id="mainWrapper">
 		<div class="container">
 	
-			<h1>Hello ${user}, your test will begin shortly..</h1>
+			<h1>Hello ${user}, <br/>your test will begin shortly.. <br/>Click on the start button below to start your test.</h1>
+			<a href="<c:url value="/test/load" />">
+				<div class="icon" id="start_test_icon">Agree and Start</div>
+			</a>
+			
 		
 	
 		</div>
 	</div>
-<jsp:include page="footer.jsp" />
+<%-- <jsp:include page="footer.jsp" /> --%>
 
 </body>
 </html>

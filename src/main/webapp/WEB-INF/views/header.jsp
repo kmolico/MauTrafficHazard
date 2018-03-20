@@ -4,7 +4,7 @@
 
 <head>
 <title>Mauritius Traffic Hazard Perception Test</title>
-
+<sec:csrfMetaTags />
 <spring:url value="/resources/css/hello.css" var="coreCss" />
 <spring:url value="/resources/css/bootstrap.min.css" var="bootstrapCss" />
 <link href="${bootstrapCss}" rel="stylesheet" />
@@ -12,6 +12,17 @@
 <link href="<spring:url value='/resources/css/app.css' />" rel="stylesheet"></link>
 <link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.css" />
 <script type="text/javascript" src="<spring:url value='/resources/js/jQuery.js'/>"></script>
+<script type="text/javascript">	
+	$(function () {
+		var token = $("meta[name='_csrf']").attr("content");
+		var header = $("meta[name='_csrf_header']").attr("content");
+		$(document).ajaxSend(function(e, xhr, options) {
+			xhr.setRequestHeader(header, token);
+		});
+	});
+
+
+</script>
 </head>
 
 <spring:url value="/" var="urlHome" />
