@@ -83,12 +83,17 @@ public class VideoServiceImpl implements VideoService{
 	public int getAttempt() {
 		int currentAttempt = videoDao.getCurrentAttempt(getPrincipal());
 		if(currentAttempt > 0) {
-			int remainingVideos = videoDao.getCountIncompleteVideo(getPrincipal(), currentAttempt);
+			int remainingVideos = getCountRemainigVideos(currentAttempt);
 			return remainingVideos == 0 ? currentAttempt + 1: currentAttempt;
 		}
 		else {
 			return currentAttempt + 1;
 		}
+	}
+	
+	@Override
+	public int getCountRemainigVideos(int currentAttempt) {
+		return videoDao.getCountIncompleteVideo(getPrincipal(), currentAttempt);
 	}
 
 	@Override

@@ -97,8 +97,10 @@ public class HomeController {
 	public ModelAndView test() {
 		//List<Video> videos = videoService.getTestVideoList();	
 		int attempt = videoService.getAttempt();
+		int remainingVideos = videoService.getCountRemainigVideos(attempt);
 		ModelAndView model = new ModelAndView("test");
 		model.addObject("attempt", attempt);
+		model.addObject("videoCount", remainingVideos);
 		model.addObject("user", getPrincipal());
 		return model;
 	}

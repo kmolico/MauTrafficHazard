@@ -15,4 +15,5 @@ public interface VideoService {
 	int getAttempt();
 	void saveScore(String hazardId, int score);
 	List<Result> getResult(int attempt);
+	int getCountRemainigVideos(int currentAttempt);
 }

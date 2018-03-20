@@ -119,7 +119,9 @@ $(document).ready(function(){
 					//async save score
 					saveScore(hazard.hazardId, score);
 				}
+				return false;
 			});
+			
 		});
 		$('#score').text(totalScore + "/" + (videoDetails.listTimeFrame.length * 5));
 		//$('#videoSource').attr('src','${urlVideo2}');
@@ -161,7 +163,6 @@ $(document).ready(function(){
 	}
 	
 	function saveScore(hazardId, score){
-		alert(hazardId + " " + score);
 		$.ajax({
 			type: "POST",
 			url: "${home}test/saveScore", 

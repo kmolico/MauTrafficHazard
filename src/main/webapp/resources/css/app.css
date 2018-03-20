@@ -94,6 +94,7 @@ body, #mainWrapper, .form-control{
 }
 #start_icon, #next_icon, #result_icon {
     top: 40%;    
+    color: #fff;
 }
 
 #review_icon {
