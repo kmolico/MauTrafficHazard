@@ -59,6 +59,11 @@ body, #mainWrapper, .form-control{
     padding: 5px 0;
 }
 
+.responsiveH2{
+	font-size: 4vw;
+	margin-left: 30%;
+}
+
 #score_overlay, #next_overlay, #result_overlay {
     position: absolute;
     float: left;

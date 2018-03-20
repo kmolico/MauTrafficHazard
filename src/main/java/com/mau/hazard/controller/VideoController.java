@@ -54,6 +54,7 @@ public class VideoController {
 		}
 		model.addObject("videoDetails", json);
 		model.addObject("testMode", false);
+		model.addObject("remainingVideo", 0);
 		return model;
 
 	}
@@ -125,12 +126,12 @@ public class VideoController {
 		List<Result> result = videoService.getResult(attempt);		
 		ModelAndView model = new ModelAndView("result");
 		model.addObject("resultList", result);
-		int totalScore = 0;
+		double totalScore = 0;
 		String outcome;
 		for (Result aResult : result) {
 			totalScore = totalScore + aResult.getScore();
 		}
-		if(totalScore/result.size()*100 >= 60) {
+		if((totalScore/(result.size()*5))*100 >= 60) {
 			outcome = "PASS";
 		}
 		else {

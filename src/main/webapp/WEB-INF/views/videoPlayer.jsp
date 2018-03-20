@@ -23,6 +23,7 @@ $(document).ready(function(){
 	var flagTime = [];
 	var flagCount = 0;
 	var vid = document.getElementById("tutorial");
+	var remainingClicks = 5;
 	
 	$('#start_icon').click(function() {
 		$('#video_overlay').hide();
@@ -96,16 +97,20 @@ $(document).ready(function(){
 	
 	$("#tutorial").on("click", function(e){
 		if(!reviewMode){
-			var currentTime = vid.currentTime;
-		    var percentage = (100 / vid.duration) * currentTime;
-		    var totalWidth = $("#custom-seekbar").width();
-		    var left = (totalWidth / 100) * percentage;
-		    
-		    flagCount = flagCount + 1;
-		    flagTime.push(currentTime);
-		    var imageId = "flag"+flagCount;
-		    $('#flag-container').append('<img style="position:absolute;" id='+imageId+' width="4%" height="100%" src="<%=request.getContextPath() %>/resources/images/Redflag.png"/>');
-		    $('#'+imageId).css("left", percentage-1 +"%");
+			remainingClicks = remainingClicks - 1;
+			if(remainingClicks >= 0){
+				$("#remainingClick").text(remainingClicks);
+				var currentTime = vid.currentTime;
+			    var percentage = (100 / vid.duration) * currentTime;
+			    var totalWidth = $("#custom-seekbar").width();
+			    var left = (totalWidth / 100) * percentage;
+			    
+			    flagCount = flagCount + 1;
+			    flagTime.push(currentTime);
+			    var imageId = "flag"+flagCount;
+			    $('#flag-container').append('<img style="position:absolute;" id='+imageId+' width="4%" height="100%" src="<%=request.getContextPath() %>/resources/images/Redflag.png"/>');
+			    $('#'+imageId).css("left", percentage-1 +"%");
+			}
 		}
 	});
 	
@@ -147,6 +152,8 @@ $(document).ready(function(){
 		$('#flag-container').empty();
 		$(".reviewFrame").remove();
 		reviewMode = false;
+		remainingClicks = 5;
+		$("#remainingClick").text(remainingClicks);
 	}
 	
 	function calcScore(actual, start, end){
@@ -188,7 +195,7 @@ $(document).ready(function(){
 <body>
 	<div id="mainWrapper">
 		<div class="container">
-	
+		<div class="responsiveH2">Remaining Clicks: <span id="remainingClick">5</span></div>
 			<div id="video-frame">
 				<div class="card">
 					<div id="video_overlay" class="vidready">
