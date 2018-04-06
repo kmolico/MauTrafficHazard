@@ -73,10 +73,10 @@ $(document).ready(function(){
 	<div id="mainWrapper">
 		<div class="container">
 	
-			<h2>Hazard Perception tutorial</h2>
-			<p class="text-info">This tutorial has 5 clips, each with 1 developing hazard.</p>
-			<p class="text-info">Tap or click the video when you feel you are encountering a developing hazard. This is something that would cause you to take some form of action, such as changing speed or direction. A red flag will appear at the bottom of the screen to show your response.</p>
-			<p class="text-info">You will score 5 points for each developing hazard. The earlier you recognise and respond to the hazard, the more points you will receive.</p>
+			<h2><spring:message code="tutorial.title" text="Default Hazard Perception Test"/></h2>
+			<p class="text-info"><spring:message code="tutorial.info.line.1" text="Default Hazard Perception Test"/></p>
+			<p class="text-info"><spring:message code="tutorial.info.line.2" text="Default Hazard Perception Test"/></p>
+			<p class="text-info"><spring:message code="tutorial.info.line.3" text="Default Hazard Perception Test"/></p>
 			
 			<div class="card-deck">
 				<c:forEach items="${listVideos}" var="video">

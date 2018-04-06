@@ -63,6 +63,8 @@ $(document).ready(function(){
 			    $('#custom-seekbar').append('<span id="'+"frame5"+index+'" class="reviewFrame" style="background-color:#f00"></span>');
 			    $("#frame5"+index).css("left", percentage1+(4*interval)+"%");  
 			    $("#frame5"+index).css("width", (interval)+"%");
+			    
+			    $("#hazardDesc").append(hazard.hazardDesc);
 			//});
 		});
 		
@@ -129,8 +131,6 @@ $(document).ready(function(){
 			
 		});
 		$('#score').text(totalScore + "/" + (videoDetails.listTimeFrame.length * 5));
-		//$('#videoSource').attr('src','${urlVideo2}');
-		//$('#tutorial').load();
 		if(testMode){
 			if(remainingVideo == 0){
 				$('#result_overlay').show();
@@ -154,6 +154,7 @@ $(document).ready(function(){
 		reviewMode = false;
 		remainingClicks = 5;
 		$("#remainingClick").text(remainingClicks);
+		$("#hazardDesc").empty();
 	}
 	
 	function calcScore(actual, start, end){
@@ -195,29 +196,30 @@ $(document).ready(function(){
 <body>
 	<div id="mainWrapper">
 		<div class="container">
-		<div class="responsiveH2">Remaining Clicks: <span id="remainingClick">5</span></div>
+		<div class="responsiveH2"><spring:message code="video.player.label.remaining.click" text="Remaining Clicks: "/><span id="remainingClick">5</span></div>
 			<div id="video-frame">
 				<div class="card">
 					<div id="video_overlay" class="vidready">
-						<div class="icon" id="start_icon">Start</div>
+						<div class="icon" id="start_icon"><spring:message code="button.start.text" text="Start"/></div>
 					</div>
 					<div id="score_overlay" class="vidready" style="display:none">
-						<div id="result">Your Score: <span id="score"></span></div>
-						<div class="icon" id="retry_icon">Retry</div>
-						<div class="icon" id="review_icon">Review</div>
-						<div class="icon" id="back_icon">Back</div>
+						<div id="result"><spring:message code="video.player.label.score" text="Your Score:"/><span id="score"></span></div>
+						<div class="icon" id="retry_icon"><spring:message code="button.retry.text" text="Retry"/></div>
+						<div class="icon" id="review_icon"><spring:message code="button.review.text" text="Review"/></div>
+						<div class="icon" id="back_icon"><spring:message code="button.back.text" text="Back"/></div>
 					</div>
 					<div id="next_overlay" class="vidready" style="display:none">
-						<a href="${getNextVideo}"><div class="icon" id="next_icon">Next</div></a>
+						<a href="${getNextVideo}"><div class="icon" id="next_icon"><spring:message code="button.next.text" text="Next"/></div></a>
 					</div>
 					<div id="result_overlay" class="vidready" style="display:none">
-						<a href="${getResult}"><div class="icon" id="result_icon">View Result</div></a>
+						<a href="${getResult}"><div class="icon" id="result_icon"><spring:message code="button.view.result.text" text="View Result"/></div></a>
 					</div>
 					<div>
 						<video id="tutorial" width="100%" preload="auto" controls> 
 						  <source id="videoSource" src="${getTutorialVideo}" type="video/mp4">
 						</video>
 					</div>
+					
 					<div id="flag-container">
 					</div>	
 					<div id="custom-seekbar">
@@ -225,10 +227,9 @@ $(document).ready(function(){
 					</div>			
 				</div>
 			</div>
-
+			<div id="hazardDesc">
+			</div>
 		</div>
 	</div>
-<jsp:include page="footer.jsp" />
-
 </body>
 </html>
