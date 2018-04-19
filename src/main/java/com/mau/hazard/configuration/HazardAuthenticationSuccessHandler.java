@@ -23,6 +23,7 @@ import com.mau.hazard.controller.HomeController;
 public class HazardAuthenticationSuccessHandler implements AuthenticationSuccessHandler{
 	
 	private static final Logger logger = LoggerFactory.getLogger(HomeController.class);
+	 
     private RedirectStrategy redirectStrategy = new DefaultRedirectStrategy();
 
 	@Override
