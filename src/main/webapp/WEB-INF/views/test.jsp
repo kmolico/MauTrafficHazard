@@ -11,16 +11,18 @@
 	<div id="mainWrapper">
 		<div class="container">
 	
-			<h1>Hello ${user}, <br/>your test will begin shortly.. <br/>Click on the start button below to start your test.</h1>
+			<h1><spring:message code="test.info.hello" text="Hello"/> ${user}, <br/>
+			<spring:message code="test.info.text1" text="Default text"/><br/>
+			<spring:message code="test.info.text2" text="Default text"/></h1>
 			<c:choose>
 				<c:when test="${videoCount eq 0}">
 					<a href="<c:url value="/test/load" />">
-						<div class="icon" id="start_test_icon">Agree and Start</div>
+						<div class="icon" id="start_test_icon"><spring:message code="button.agree.start" text="Agree and Start"/></div>
 					</a>
 				</c:when>
 				<c:otherwise>
 					<a href="<c:url value="/test/load" />">
-						<div class="icon" id="start_test_icon">Resume</div>
+						<div class="icon" id="start_test_icon"><spring:message code="button.resume" text="Resume"/></div>
 					</a>
 				</c:otherwise>
 			</c:choose>

@@ -13,6 +13,13 @@
 
 <c:url var="home" value="/" scope="request" />
 
+<c:set var="hazards" value="${videoObject.listTimeFrame}"/>
+<c:forEach var="hazard" items="${hazards}">
+	<spring:message var="hazDesc" code='${hazard.hazardDesc}'/>
+	<c:set var="hazardDesc" value="${hazardDesc}${ hazDesc}">
+	</c:set>
+</c:forEach>
+
 
 <script>
 $(document).ready(function(){
@@ -24,6 +31,7 @@ $(document).ready(function(){
 	var flagCount = 0;
 	var vid = document.getElementById("tutorial");
 	var remainingClicks = 5;
+	
 	
 	$('#start_icon').click(function() {
 		$('#video_overlay').hide();
@@ -64,10 +72,10 @@ $(document).ready(function(){
 			    $("#frame5"+index).css("left", percentage1+(4*interval)+"%");  
 			    $("#frame5"+index).css("width", (interval)+"%");
 			    
-			    $("#hazardDesc").append(hazard.hazardDesc);
+			    
 			//});
 		});
-		
+		$("#hazardDesc").text('${hazardDesc}');
 		
 		$("#tutorial").get(0).play();
 	});
@@ -88,14 +96,14 @@ $(document).ready(function(){
 	  $("#custom-seekbar #seek").css("width", percentage+"%");
 	};
 
-	$("#custom-seekbar").on("click", function(e){
+	/* $("#custom-seekbar").on("click", function(e){
 	    var offset = $(this).offset();
 	    var left = (e.pageX - offset.left);
 	    var totalWidth = $("#custom-seekbar").width();
 	    var percentage = ( left / totalWidth );
 	    var vidTime = vid.duration * percentage;
 	    vid.currentTime = vidTime;
-	});
+	}); */
 	
 	$("#tutorial").on("click", function(e){
 		if(!reviewMode){
@@ -126,7 +134,10 @@ $(document).ready(function(){
 					//async save score
 					saveScore(hazard.hazardId, score);
 				}
-				return false;
+				if(score > 0){
+					return false;
+				}
+				
 			});
 			
 		});
@@ -193,7 +204,9 @@ $(document).ready(function(){
 });	
 </script>
 
+
 <body>
+	
 	<div id="mainWrapper">
 		<div class="container">
 		<div class="responsiveH2"><spring:message code="video.player.label.remaining.click" text="Remaining Clicks: "/><span id="remainingClick">5</span></div>
@@ -215,7 +228,7 @@ $(document).ready(function(){
 						<a href="${getResult}"><div class="icon" id="result_icon"><spring:message code="button.view.result.text" text="View Result"/></div></a>
 					</div>
 					<div>
-						<video id="tutorial" width="100%" preload="auto" controls> 
+						<video id="tutorial" width="100%" preload="auto"> 
 						  <source id="videoSource" src="${getTutorialVideo}" type="video/mp4">
 						</video>
 					</div>
@@ -227,7 +240,8 @@ $(document).ready(function(){
 					</div>			
 				</div>
 			</div>
-			<div id="hazardDesc">
+			<div>
+				<p class="text-info hazard_desc" id="hazardDesc"></p>
 			</div>
 		</div>
 	</div>

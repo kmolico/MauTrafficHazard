@@ -19,36 +19,36 @@
 			<!-- form card login -->
                     <div class="card rounded-0">
                         <div class="card-header">
-                            <h3 class="mb-0">Login</h3>
+                            <h3 class="mb-0"><spring:message code="navbar.login" text="Login"/></h3>
                         </div>
                         <div class="card-body">
                             <form action="${loginUrl}" method="post" class="form" role="form" autocomplete="off" id="formLogin">
                             	<c:if test="${param.error != null}">
 								<div class="alert alert-danger">
-									<p>Invalid username and password.</p>
+									<p><spring:message code="login.invalid.username.password" text="Invalid username and password."/></p>
 								</div>
 								</c:if>
 								<c:if test="${param.logout != null}">
 									<div class="alert alert-success">
-										<p>You have been logged out successfully.</p>
+										<p><spring:message code="login.succesful.logout.message" text="You have been logged out successfully."/></p>
 									</div>
 								</c:if>
                                 <div class="form-group">
-                                    <label for="uname1">Username</label>
+                                    <label for="uname1"><spring:message code="login.username" text="Username"/></label>
                                     <input type="text" class="form-control" name="ssoId" id="uname1" placeholder="Enter Username" required>
                                 </div>
                                 <div class="form-group">
-                                    <label>Password</label>
+                                    <label><spring:message code="login.password" text="Password"/></label>
                                     <input type="password" name="password" class="form-control" id="pwd1" placeholder="Enter Password" required autocomplete="new-password">
                                 </div>
                                 <input type="hidden" name="${_csrf.parameterName}" 	value="${_csrf.token}" />
                                 
-                                <button type="submit" class="btn btn-primary btn-block">Login</button>
+                                <button type="submit" class="btn btn-primary btn-block"><spring:message code="navbar.login" text="Login"/></button>
                             </form>
                         </div>
                         <!--/card-block-->
                         <div>
-							<a href="${urlRegister}" class="btn btn-link float-right">Register</a>
+							<a href="${urlRegister}" class="btn btn-link float-right"><spring:message code="navbar.register" text="Register"/></a>
 						</div>
                     </div>
                     <!-- /form card login -->

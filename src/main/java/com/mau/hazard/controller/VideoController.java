@@ -53,6 +53,7 @@ public class VideoController {
 			e.printStackTrace();
 		}
 		model.addObject("videoDetails", json);
+		model.addObject("videoObject", video);
 		model.addObject("testMode", false);
 		model.addObject("remainingVideo", 0);
 		return model;

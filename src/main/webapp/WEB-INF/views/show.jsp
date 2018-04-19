@@ -20,41 +20,41 @@
 		</div>
 	</c:if>
 
-	<h1>User Detail</h1>
+	<h2><spring:message code="registration.account.info" text="Account Information "/></h2>
 	<br />
 
 	<div class="row">
-		<label class="col-sm-2">Username</label>
+		<label class="col-sm-2"><spring:message code="registration.username" text="Username" var="username"/></label>
 		<div class="col-sm-10">${user.name}</div>
 	</div>
 
 	<div class="row">
-		<label class="col-sm-2">First Name</label>
+		<label class="col-sm-2"><spring:message code="registration.firstname" text="First Name" var="fname"/></label>
 		<div class="col-sm-10">${user.fname}</div>
 	</div>
 	
 	<div class="row">
-		<label class="col-sm-2">Last Name</label>
+		<label class="col-sm-2"><spring:message code="registration.lastname" text="Last Name" var="lname"/></label>
 		<div class="col-sm-10">${user.lname}</div>
 	</div>
 
 	<div class="row">
-		<label class="col-sm-2">Email</label>
+		<label class="col-sm-2"><spring:message code="registration.email" text="Email" var="email"/></label>
 		<div class="col-sm-10">${user.email}</div>
 	</div>
 
 	<div class="row">
-		<label class="col-sm-2">Address</label>
+		<label class="col-sm-2"><spring:message code="registration.address" text="Address" var="address"/></label>
 		<div class="col-sm-10">${user.address}</div>
 	</div>
 
 	<div class="row">
-		<label class="col-sm-2">Gender</label>
+		<label class="col-sm-2"><spring:message code='registration.gender' text='Gender'/></label>
 		<div class="col-sm-10">${user.sex}</div>
 	</div>
 
 	<div class="row">
-		<label class="col-sm-2">License</label>
+		<label class="col-sm-2"><spring:message code="registration.driving.license" text="Driving License" var="license"/></label>
 		<div class="col-sm-10">${user.license}</div>
 	</div>
 

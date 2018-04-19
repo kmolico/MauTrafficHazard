@@ -14,6 +14,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	@Autowired
+	HazardAuthenticationSuccessHandler hazardAuthenticationSuccessHandler;
+	
+	@Autowired
 	DataSource dataSource;
 	
 	@Autowired
@@ -37,6 +40,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 	  	.antMatchers("/db/**").access("hasRole('ROLE_ADMIN') and hasRole('ROLE_DBA')")
 	  	.and().formLogin().loginPage("/login")
 	  	.usernameParameter("ssoId").passwordParameter("password")
+	  	.successHandler(hazardAuthenticationSuccessHandler)
 	  	.and().csrf()
 	  	.and().exceptionHandling().accessDeniedPage("/Access_Denied");
 	}
