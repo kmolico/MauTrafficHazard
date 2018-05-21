@@ -86,10 +86,9 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public void update(User user) {
 
-		String sql = "UPDATE USERS SET NAME=:name, EMAIL=:email, ADDRESS=:address, "
-			+ "PASSWORD=:password, NEWSLETTER=:newsletter, FRAMEWORK=:framework, "
-			+ "SEX=:sex, NUMBER=:number, COUNTRY=:country, SKILL=:skill WHERE userid=:id";
-
+		String sql = "UPDATE USERS SET fname=:fname, lname=:lname, EMAIL=:email, ADDRESS=:address, "
+			+ "PASSWORD=:password, "
+			+ "gender=:sex, license=:license WHERE username=:name";
 		namedParameterJdbcTemplate.update(sql, getSqlParameterByModel(user));
 
 	}

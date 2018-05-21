@@ -20,31 +20,31 @@
 		</div>
 	</c:if>
 
-	<h2><spring:message code="registration.account.info" text="Account Information "/></h2>
+	<h2><spring:message code='registration.account.info' text='Account Information'/></h2>
 	<br />
 
 	<div class="row">
-		<label class="col-sm-2"><spring:message code="registration.username" text="Username" var="username"/></label>
+		<label class="col-sm-2"><spring:message code='registration.username' text='Username'/></label>
 		<div class="col-sm-10">${user.name}</div>
 	</div>
 
 	<div class="row">
-		<label class="col-sm-2"><spring:message code="registration.firstname" text="First Name" var="fname"/></label>
+		<label class="col-sm-2"><spring:message code='registration.firstname' text='First Name'/></label>
 		<div class="col-sm-10">${user.fname}</div>
 	</div>
 	
 	<div class="row">
-		<label class="col-sm-2"><spring:message code="registration.lastname" text="Last Name" var="lname"/></label>
+		<label class="col-sm-2"><spring:message code='registration.lastname' text='Last Name'/></label>
 		<div class="col-sm-10">${user.lname}</div>
 	</div>
 
 	<div class="row">
-		<label class="col-sm-2"><spring:message code="registration.email" text="Email" var="email"/></label>
+		<label class="col-sm-2"><spring:message code='registration.email' text='Email'/></label>
 		<div class="col-sm-10">${user.email}</div>
 	</div>
 
 	<div class="row">
-		<label class="col-sm-2"><spring:message code="registration.address" text="Address" var="address"/></label>
+		<label class="col-sm-2"><spring:message code='registration.address' text='Address'/></label>
 		<div class="col-sm-10">${user.address}</div>
 	</div>
 
@@ -54,13 +54,12 @@
 	</div>
 
 	<div class="row">
-		<label class="col-sm-2"><spring:message code="registration.driving.license" text="Driving License" var="license"/></label>
+		<label class="col-sm-2"><spring:message code='registration.driving.license' text='Driving License'/></label>
 		<div class="col-sm-10">${user.license}</div>
 	</div>
 
 </div>
 
-<jsp:include page="footer.jsp" />
 
 </body>
 </html>

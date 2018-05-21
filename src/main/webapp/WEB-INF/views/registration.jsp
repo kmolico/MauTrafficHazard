@@ -129,12 +129,17 @@
 		</spring:bind>
 
 		<spring:bind path="license">
-		<spring:message code="registration.driving.license" text="Driving License" var="license"/>	
+		<spring:message code="registration.driving.license" text="Own driving License" var="license"/>	
 		  <div class="form-group ${status.error ? 'has-error' : ''}">
-			<label class="col-sm-2 control-label"><spring:message code="registration.driving.license" text="Driving License"/></label>
-			<div class="col-sm-10">		
-				<form:input path="license" type="text" class="form-control"
-                                id="license" placeholder="${license}" />
+			<label class="col-sm-2 control-label"><spring:message code="registration.driving.license" text="Own driving License"/></label>
+			<div class="col-sm-10">                                
+                <label class="radio-inline">
+                	<form:radiobutton path="license" value="Y" checked="${license == 'Y' ? 'checked' : '' }"/>Yes 
+                </label>
+                <label class="radio-inline">
+					<form:radiobutton path="license" value="N" checked="${license == 'N' ? 'checked' : '' }"/>No 
+				</label>
+				<br />
 				<form:errors path="license" class="col-form-label text-danger" />
 			</div>
 		  </div>

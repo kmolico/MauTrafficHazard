@@ -109,7 +109,7 @@ $(document).ready(function(){
 		if(!reviewMode){
 			remainingClicks = remainingClicks - 1;
 			if(remainingClicks >= 0){
-				$("#remainingClick").text(remainingClicks);
+				/* $("#remainingClick").text(remainingClicks); */
 				var currentTime = vid.currentTime;
 			    var percentage = (100 / vid.duration) * currentTime;
 			    var totalWidth = $("#custom-seekbar").width();
@@ -164,7 +164,7 @@ $(document).ready(function(){
 		$(".reviewFrame").remove();
 		reviewMode = false;
 		remainingClicks = 5;
-		$("#remainingClick").text(remainingClicks);
+		/* $("#remainingClick").text(remainingClicks); */
 		$("#hazardDesc").empty();
 	}
 	
@@ -209,7 +209,7 @@ $(document).ready(function(){
 	
 	<div id="mainWrapper">
 		<div class="container">
-		<div class="responsiveH2"><spring:message code="video.player.label.remaining.click" text="Remaining Clicks: "/><span id="remainingClick">5</span></div>
+		<div class="responsiveH2"><%-- <spring:message code="video.player.label.remaining.click" text="Remaining Clicks: "/><span id="remainingClick">5</span> --%></div>
 			<div id="video-frame">
 				<div class="card">
 					<div id="video_overlay" class="vidready">
