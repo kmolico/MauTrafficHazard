@@ -30,6 +30,7 @@
 <spring:url value="/test" var="urlTest" />
 <spring:url value="/login" var="urlLogin" />
 <spring:url value="/logout" var="urlLogout" />
+<spring:url value="/feedback" var="urlFeedback" />
 <header>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 	<div class="container">
@@ -42,7 +43,7 @@
 			      <li class="nav-item active"><a class="nav-link" href="${urlHome}">Home</a></li>
 			      <li class="nav-item"><a class="nav-link" href="${urlTutorial}">Tutorial</a></li>
 			      <li class="nav-item"><a class="nav-link" href="${urlTest}">Test</a></li>
-			      <li class="nav-item"><a class="nav-link" href="#">Page 3</a></li>
+			      <li class="nav-item"><a class="nav-link" href="${urlFeedback}">Feedback</a></li>
 			    </ul>
 			    <ul class="navbar-nav ml-auto">
 			    	<li class="nav-item active">

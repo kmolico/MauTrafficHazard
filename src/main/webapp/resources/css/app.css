@@ -178,3 +178,11 @@ body, #mainWrapper, .form-control{
 	margin: 5%;
 	text-align: right;
 }
+
+.respH3{
+	font-size: 4vw;
+}
+
+.respH5{
+	font-size: 5vw;
+}
