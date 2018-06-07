@@ -30,8 +30,7 @@ $(document).ready(function(){
 	var flagTime = [];
 	var flagCount = 0;
 	var vid = document.getElementById("tutorial");
-	var remainingClicks = 5;
-	
+	$("#remainingVideo").text(remainingVideo);
 	
 	$('#start_icon').click(function() {
 		$('#video_overlay').hide();
@@ -76,6 +75,7 @@ $(document).ready(function(){
 			//});
 		});
 		$("#hazardDesc").text('${hazardDesc}');
+		$("#hazardDescPlaceholder").show();
 		
 		$("#tutorial").get(0).play();
 	});
@@ -107,9 +107,6 @@ $(document).ready(function(){
 	
 	$("#tutorial").on("click", function(e){
 		if(!reviewMode){
-			remainingClicks = remainingClicks - 1;
-			if(remainingClicks >= 0){
-				/* $("#remainingClick").text(remainingClicks); */
 				var currentTime = vid.currentTime;
 			    var percentage = (100 / vid.duration) * currentTime;
 			    var totalWidth = $("#custom-seekbar").width();
@@ -120,7 +117,7 @@ $(document).ready(function(){
 			    var imageId = "flag"+flagCount;
 			    $('#flag-container').append('<img style="position:absolute;" id='+imageId+' width="4%" height="100%" src="<%=request.getContextPath() %>/resources/images/Redflag.png"/>');
 			    $('#'+imageId).css("left", percentage-1 +"%");
-			}
+			
 		}
 	});
 	
@@ -163,9 +160,8 @@ $(document).ready(function(){
 		$('#flag-container').empty();
 		$(".reviewFrame").remove();
 		reviewMode = false;
-		remainingClicks = 5;
-		/* $("#remainingClick").text(remainingClicks); */
 		$("#hazardDesc").empty();
+		$("#hazardDescPlaceholder").hide();
 	}
 	
 	function calcScore(actual, start, end){
@@ -209,7 +205,10 @@ $(document).ready(function(){
 	
 	<div id="mainWrapper">
 		<div class="container">
-		<div class="responsiveH2"><%-- <spring:message code="video.player.label.remaining.click" text="Remaining Clicks: "/><span id="remainingClick">5</span> --%></div>
+		<div class="responsiveH2"><spring:message code="video.player.info" text="Click on the video whenever you think there is a developing hazard."/></div>
+		<c:if test="${testMode}">
+			<div class="responsiveH2"><spring:message code="video.player.label.remaining.video" text="Remaining Videos "/><span id="remainingVideo"></span></div>
+		</c:if>
 			<div id="video-frame">
 				<div class="card">
 					<div id="video_overlay" class="vidready">
@@ -240,8 +239,10 @@ $(document).ready(function(){
 					</div>			
 				</div>
 			</div>
-			<div>
-				<p class="text-info hazard_desc" id="hazardDesc"></p>
+			<div id="hazardDescPlaceholder" style="display:none">
+				<div style="float:right; width:13%; margin-top:10%; padding:7px" class="border border-info rounded bg-light">
+						<h5 id="hazardDesc"></h5>
+				</div>
 			</div>
 		</div>
 	</div>

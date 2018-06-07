@@ -60,8 +60,8 @@ body, #mainWrapper, .form-control{
 }
 
 .responsiveH2{
-	font-size: 4vw;
-	margin-left: 30%;
+	font-size: 2vw;
+	margin-left: 15%;
 }
 
 #score_overlay, #next_overlay, #result_overlay {
