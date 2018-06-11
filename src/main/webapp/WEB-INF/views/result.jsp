@@ -52,6 +52,9 @@
 						    <td>${result.score}</td>
 						  </tr>
 					</c:forEach>
+					<tr>
+					    <td colspan ="3" style="align:center">Please click <a href="https://goo.gl/forms/I8IufZkgQig6BOEY2" target="_blank">&nbsp;here&nbsp;</a> to take a quick survey.</td>
+					</tr>
 				</table>
 			</div>
 		</div>
